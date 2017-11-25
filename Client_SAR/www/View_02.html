@@ -12,6 +12,7 @@
   </table>
 </div>
 <img id="image_disp" class="hidden">
+<div id="debug_dom">Debug</div>
 
 <script>
 var pic_received = function() {
@@ -20,9 +21,11 @@ var pic_received = function() {
 
 function capture_item_img() {
   $("#dialog_2_1").hide();
-  if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
+  if (cordova.platformId == "browser") {
+    $('#debug_dom').text("desktop");
     capturePhotoWithData("image_disp", pic_received);
   } else {
+    $('#debug_dom').text("phone");
     capturePhotoWithFile("image_disp", pic_received);
   }
 }

@@ -1,0 +1,23 @@
+<div id="dialog_2_1">
+  <h1 class="fullsize pad">DB Output:</h1>
+  <button onclick="push_data();">Request</button>
+</div>
+
+<script>
+  $.getJSON( "http://www.dailydeel.com/api/v1/products/1/reviews?page=5", {} )
+    .done(function( json ) {
+      console.log( "JSON Data: " + json[0].title );
+    })
+    .fail(function( jqxhr, textStatus, error ) {
+      var err = textStatus + ", " + error;
+      console.log( "Request Failed: " + err );
+  });
+
+function push_data() {
+  var data = "Test text.";
+  $.post( "http://130.233.86.184:8080/", { name: "John", time: "2pm" } );
+  /*$.post("http://localhost:8080/", function(data, status){
+        alert("Data: " + data + "\nStatus: " + status);
+    });*/
+}
+</script>

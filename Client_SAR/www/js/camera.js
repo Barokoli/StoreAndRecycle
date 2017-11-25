@@ -16,12 +16,12 @@ function init_camera() {
 function onPhotoDataSuccess(imageData) {
   // Get image handle
   //
-  var smallImage = document.getElementById(result_disp);
+  var smallImage = document.getElementById("image_ghost");
   // Unhide image elements
   // Show the captured photo
   // The inline CSS rules are used to resize the image
   smallImage.src = "data:image/jpeg;base64," + imageData;
-  //$('#' + result_disp).css('background-image', 'url(data:image/jpeg;base64,' + imageData + ')');
+  $('#' + result_disp).css('background-image', 'url(data:image/jpeg;base64,' + imageData + ')');
   result_cb();
 }
 
@@ -33,7 +33,7 @@ function onPhotoFileSuccess(imageData) {
 
   // Get image handle
   //
-  var smallImage = document.getElementById(result_disp);
+  var smallImage = document.getElementById('image_ghost');
   // Unhide image elements
   //
   //smallImage.style.display = 'block';
@@ -41,8 +41,11 @@ function onPhotoFileSuccess(imageData) {
   // The inline CSS rules are used to resize the image
   //
   smallImage.src = imageData;
-  //$('#' + result_disp).css('background-image', 'url(' + imageData + ')');
+  $('#' + result_disp).css('background-image', 'url(' + imageData + ')');
+  $('#' + result_disp).css("width", $(window).width() + "px");
+  $('#' + result_disp).css("height", $(window).width() * 1.333333333333 + "px");
   result_cb();
+  //$('#' + result_disp).css('background-image', 'url(' + imageData + ')');
 }
 // Called when a photo is successfully retrieved
 //
@@ -64,12 +67,13 @@ function onPhotoURISuccess(imageURI) {
 //
 function capturePhotoWithData(cb_id, cb) {
   // Take picture using device camera and retrieve image as base64-encoded string
-  navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
+  navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 75, correctOrientation: true });
   result_disp = cb_id;
   result_cb = cb;
 }
+
 function capturePhotoWithFile(cb_id, cb) {
-    navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 50, destinationType: Camera.DestinationType.FILE_URI });
+    navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 75, correctOrientation: true, destinationType: Camera.DestinationType.FILE_URI });
     result_disp = cb_id;
     result_cb = cb;
 }
@@ -78,9 +82,11 @@ function capturePhotoWithFile(cb_id, cb) {
 //
 function getPhoto(source) {
   // Retrieve image file location from specified source
-  navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+  navigator.camera.getPicture(onPhotoURISuccess, onFail, {
+    quality: 75,
     destinationType: destinationType.FILE_URI,
-    sourceType: source });
+    sourceType: source,
+    correctOrientation: true });
 }
 // Called if something bad happens.
 //

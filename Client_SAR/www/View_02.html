@@ -11,16 +11,44 @@
     </tr>
   </table>
 </div>
-<img id="image_disp" class="hidden">
+<div id="image_disp" class="hidden">
+<img id="image_ghost" onload="check_size();">
+<div id="debug_dom">Debug</div>
 
 <script>
+
+function check_size() {
+  console.log($('#image_ghost').width());
+  console.log($('#image_ghost').height());
+  if (cordova.platformId == "browser") {
+    var r_ratio = $('#image_ghost').width() / $('#image_ghost').height();
+
+    if (r_ratio >= 1.0) {
+      $("#image_disp").css("width", $(document).width() + "px");
+      $("#image_disp").css("max-height", $(document).width() * r_ratio + "px");
+    } else {
+      $("#image_disp").css("height", $(document).height() + "px");
+      $("#image_disp").css("max-width", $(document).height() / r_ratio + "px");
+    }
+  }
+}
 var pic_received = function() {
   $("#image_disp").show();
+  //$("#image_disp").src =
+
+  //var r_ratio = $('#image_ghost').width();
+  /*if (r_ratio <= 1.0) {
+    $("#image_disp").css("width", $(document).width() + "px");
+    $("#image_disp").css("max-height", $(document).width() * r_ratio + "px");
+  } else {
+    $("#image_disp").css("height", $(document).height() + "px");
+    $("#image_disp").css("max-width", $(document).height() / r_ratio + "px");
+  }*/
 }
 
 function capture_item_img() {
   $("#dialog_2_1").hide();
-  if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
+  if (cordova.platformId == "browser") {
     capturePhotoWithData("image_disp", pic_received);
   } else {
     capturePhotoWithFile("image_disp", pic_received);

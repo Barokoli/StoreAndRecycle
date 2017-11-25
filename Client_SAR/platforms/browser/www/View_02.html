@@ -1,0 +1,26 @@
+<div id="dialog_2_1" class="full">
+  <h1 class="fullsize pad">Where do you want to store it?</h1>
+  <table class="fullsize centered">
+    <tr>
+      <td>
+        <button onclick="capture_item_img();">In a Box</button>
+      </td>
+      <td>
+        <button>Individual</button>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="image_disp" class="hidden full"></div>
+
+
+<script>
+var pic_received = function() {
+  $("#image_disp").show();
+}
+
+function capture_item_img() {
+  $("#dialog_2_1").hide();
+  capturePhotoWithData("image_disp", pic_received);
+}
+</script>

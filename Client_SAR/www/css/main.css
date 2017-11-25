@@ -1,0 +1,66 @@
+@font-face {
+    font-family: "chivo";
+    src: url("/chivo/") format("truetype");
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+.full {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: #FFF;
+  font-family: "chivo";
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.bg_big_box {
+  padding: 0;
+  margin: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+button {
+    font-size: 20pt;
+    border: none;
+    background: none;
+}
+
+h1 {
+  font-family: "chivo";
+  font-size: 30pt;
+  font-weight: bold;
+  text-align: center;
+}
+
+.centered {
+  text-align: center;
+}
+
+.pad {
+  padding: 10px 10px, 10px, 10px;
+}
+
+.fullsize {
+  width: 100%;
+}
+
+#image_diso {
+  background-image: url();
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}

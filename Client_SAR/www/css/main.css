@@ -34,14 +34,14 @@ body {
 }
 
 button {
-    font-size: 20pt;
+    font-size: 30pt;
     border: none;
     background: none;
 }
 
 h1 {
   font-family: "chivo";
-  font-size: 30pt;
+  font-size: 40pt;
   font-weight: bold;
   text-align: center;
 }
@@ -75,6 +75,10 @@ h1 {
 
 .fullsize {
   width: 100%;
+}
+
+.eightysize {
+  width: 80%;
 }
 
 #image_disp {

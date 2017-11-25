@@ -11,8 +11,7 @@
     </tr>
   </table>
 </div>
-<div id="image_disp" class="hidden full"></div>
-
+<img id="image_disp" class="hidden">
 
 <script>
 var pic_received = function() {
@@ -21,6 +20,10 @@ var pic_received = function() {
 
 function capture_item_img() {
   $("#dialog_2_1").hide();
-  capturePhotoWithData("image_disp", pic_received);
+  if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
+    capturePhotoWithData("image_disp", pic_received);
+  } else {
+    capturePhotoWithFile("image_disp", pic_received);
+  }
 }
 </script>

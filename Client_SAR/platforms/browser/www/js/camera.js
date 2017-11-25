@@ -16,15 +16,12 @@ function init_camera() {
 function onPhotoDataSuccess(imageData) {
   // Get image handle
   //
-  //var smallImage = document.getElementById(result_disp);
+  var smallImage = document.getElementById(result_disp);
   // Unhide image elements
-  //
-  //smallImage.style.display = 'block';
   // Show the captured photo
   // The inline CSS rules are used to resize the image
-  //
-  //smallImage.src = "data:image/jpeg;base64," + imageData;
-  $('#' + result_disp).css('background-image', 'url(data:image/jpeg;base64,' + imageData + ')');
+  smallImage.src = "data:image/jpeg;base64," + imageData;
+  //$('#' + result_disp).css('background-image', 'url(data:image/jpeg;base64,' + imageData + ')');
   result_cb();
 }
 
@@ -32,18 +29,20 @@ function onPhotoDataSuccess(imageData) {
 //
 function onPhotoFileSuccess(imageData) {
   // Get image handle
-  console.log(JSON.stringify(imageData));
+  //console.log(JSON.stringify(imageData));
 
   // Get image handle
   //
-  var smallImage = document.getElementById('smallImage');
+  var smallImage = document.getElementById(result_disp);
   // Unhide image elements
   //
-  smallImage.style.display = 'block';
+  //smallImage.style.display = 'block';
   // Show the captured photo
   // The inline CSS rules are used to resize the image
   //
   smallImage.src = imageData;
+  //$('#' + result_disp).css('background-image', 'url(' + imageData + ')');
+  result_cb();
 }
 // Called when a photo is successfully retrieved
 //
@@ -69,8 +68,10 @@ function capturePhotoWithData(cb_id, cb) {
   result_disp = cb_id;
   result_cb = cb;
 }
-function capturePhotoWithFile() {
+function capturePhotoWithFile(cb_id, cb) {
     navigator.camera.getPicture(onPhotoFileSuccess, onFail, { quality: 50, destinationType: Camera.DestinationType.FILE_URI });
+    result_disp = cb_id;
+    result_cb = cb;
 }
 
 // A button will call this function

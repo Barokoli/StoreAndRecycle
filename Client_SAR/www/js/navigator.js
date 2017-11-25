@@ -1,4 +1,4 @@
-var active_view = 1;
+var active_view = 0;
 
 function load_view(nr) {
     $('#View_0'+active_view).hide();
@@ -14,7 +14,7 @@ function init_nav() {
 }
 
 function nav_go_back() {
-  if (active_view > 1) {
+  if (active_view > 0) {
     load_view(active_view - 1);
   }
 }

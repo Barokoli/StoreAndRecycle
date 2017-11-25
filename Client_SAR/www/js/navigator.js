@@ -2,11 +2,13 @@ var active_view = 0;
 var view_history = [];
 
 function load_view(nr) {
-    $('#View_0'+active_view).hide();
+    var layer = nr > 9 ? "#View_" + nr : "#View_0" + nr;
+    var layer_a = nr > 9 ? "#View_" + active_view : "#View_0" + active_view;
+    $(layer_a).hide();
     view_history.push(active_view);
-    $('#View_0'+nr).show();
-    if ($("#View_0"+nr).html() == "") {
-        $("#View_0"+nr).load("View_0"+nr+".html");
+    $(layer).show();
+    if ($(layer_a).html() == "") {
+        $(layer).load(layer+".html");
     }
     active_view = nr;
 }

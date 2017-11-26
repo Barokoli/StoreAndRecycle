@@ -156,11 +156,11 @@ function storage_action(t , m) {
         } else if (last_tag_read != tag){
           if (tag == "Junction.2017.1") {
             console.log("Item left storage. first tag: " + last_tag_read + " second tag");
-            update_db(tag, true);
+            update_db(m.toString(), true);
 						last_tag_read = "";
           } else {
             console.log("Item entered storage.");
-            update_db(tag, false);
+            update_db(m.toString(), false);
 						last_tag_read = "";
           }
         }
@@ -172,7 +172,7 @@ function storage_action(t , m) {
 }
 
 function update_db(t, went_in) {
-  console.log("update db!");
+  console.log("update db! " + t + " bool:" + went_in);
   con.query("USE sys");
   con.query("UPDATE products SET `in_store` = " + went_in + " WHERE `tag` = '" + t + "' ", function (err, result, fields) {
     if (err) {

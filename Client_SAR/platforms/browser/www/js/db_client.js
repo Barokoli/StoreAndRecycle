@@ -26,5 +26,6 @@ function set_next_rfid() {
 }
 
 function update_db(id, field, data) {
-  $.post( ip + ":8080/", { query: 'UPDATE products SET `'+field+'` = "'+data+'" WHERE `idproducts` = "'+id+'"' } );
+  var q = 'UPDATE products SET `'+field+'` = "'+data+'" WHERE `idproducts` = "'+id+'"';
+  $.post( ip + ":8080/", { query: q } );
 }

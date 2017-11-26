@@ -30,13 +30,14 @@ js_server.on('request', function (req, res) {
     }
 
     req.on('data', function (data) {
-      console.log(data);
+      console.log("some data: " + data);
         body += data;
     });
 
     req.on('end', function () {
         var post = querystring.parse(body);
-        console.log(post);
+        //console.log(post);
+				parse_post_data(post);
         //res.writeHead(200, {'Content-Type': 'text/plain'});
         //res.end('Hello World\n');
     });
@@ -184,3 +185,67 @@ function wait_for_tag(p_id) {
   console.log("Waiting for tag to be scanned.")
   registering_tag = p_id;
 }
+
+function parse_post_data(data) {
+	if (data) {
+		console.log("updated db");
+		if (data.query) {
+			con.query("USE sys");
+		  con.query(data.query.toString(), function (err, result, fields) {
+		    if (err) {
+		      throw err;
+		    }
+		  });
+		}
+	}
+}
+
+/*
+var data_set;
+var jsonfile = require('jsonfile');
+var file = '/tmp/data.json'
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "Recycle"
+});
+
+function refresh_ind (err) {
+	console.log("Refreshed.");
+  if (err) throw err;
+  console.log("Connected!");
+  con.query("USE sys");
+  con.query("SELECT * FROM products", function (err, result, fields) {
+    if (err) {
+      throw err;
+    } else {
+      data_set = result;
+      //console.log(result);
+    }
+    write_json();
+  });
+}
+
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  con.query("USE sys");
+  con.query("SELECT * FROM products", function (err, result, fields) {
+    if (err) {
+      throw err;
+    } else {
+      data_set = result;
+      //console.log(result);
+    }
+    write_json();
+		setInterval(refresh_ind, 6000);
+  });
+});
+
+function write_json() {
+  jsonfile.writeFile(file, data, function (err) {
+    console.error(err)
+  })
+}*/

@@ -188,7 +188,6 @@ function wait_for_tag(p_id) {
 
 function parse_post_data(data) {
 	if (data) {
-		console.log("updated db");
 		if (data.query) {
 			con.query("USE sys");
 		  con.query(data.query.toString(), function (err, result, fields) {
@@ -200,7 +199,6 @@ function parse_post_data(data) {
 	}
 }
 
-/*
 var data_set;
 var jsonfile = require('jsonfile');
 var file = '/tmp/data.json'
@@ -212,9 +210,7 @@ var con = mysql.createConnection({
 });
 
 function refresh_ind (err) {
-	console.log("Refreshed.");
   if (err) throw err;
-  console.log("Connected!");
   con.query("USE sys");
   con.query("SELECT * FROM products", function (err, result, fields) {
     if (err) {
@@ -240,12 +236,12 @@ con.connect(function(err) {
       //console.log(result);
     }
     write_json();
-		setInterval(refresh_ind, 6000);
+		setInterval(refresh_ind, 1000);
   });
 });
 
 function write_json() {
-  jsonfile.writeFile(file, data, function (err) {
-    console.error(err)
+  jsonfile.writeFile(file, data_set, function (err) {
+    //console.error(err)
   })
-}*/
+}

@@ -91,6 +91,20 @@ h1 {
   right: 20px;
 }
 
+.wubwub {
+  padding-left: 10px;
+  width: 98%;
+  font-size: 10pt;
+}
+
+.submenu button {
+  font-size: 30pt;
+}
+
+#storage_counter {
+  font-size: 50pt;
+}
+
 .small{
   font-size: 50pt
 }

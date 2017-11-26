@@ -74,6 +74,23 @@ h1 {
 
 }
 
+#titel_ins {
+  position: absolute;
+  top: 70%;
+  background-color: rgba(1,1,1,0.2f);
+  border: none;
+  font-size: 50pt;
+  width: 95%;
+  text-align: center;
+}
+
+#add_item_check {
+  font-size: 40pt;
+  position: absolute;
+  top: 73%;
+  right: 20px;
+}
+
 .small{
   font-size: 50pt
 }
@@ -107,13 +124,10 @@ background-color: #cccccc;
   width: 80%;
 }
 
-#image_disp {
-  background-image: url();
-  background-size: cover;
+#image_disp2 {
   position: fixed;
   top: 0px;
   left: 0px;
-  width: 600px;
 }
 
 .positive{

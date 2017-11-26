@@ -1,0 +1,39 @@
+diff --git a/Server_SAR/rfid_tracker.js b/Server_SAR/rfid_tracker.js
+index c344dbf..d31415f 100644
+--- a/Server_SAR/rfid_tracker.js
++++ b/Server_SAR/rfid_tracker.js
+@@ -2,6 +2,8 @@ var mqtt = require('mqtt');
+ var client  = mqtt.connect('mqtt://mqtt.intelligentpackaging.online');
+ var mysql = require('mysql');
+ var last_tag_read = "";
++var registering_tag = -1;
++var registered_tag_cb;
+ 
+ var con = mysql.createConnection({
+   host: "localhost",
+@@ -27,6 +29,17 @@ function storage_action(t , m) {
+   if (tag == "Junction.2017.2" || tag == "Junction.2017.4") {
+     return;
+   }
++
++  if (registering_tag > -1) {
++    con.query("USE sys");
++    con.query("UPDATE products SET `tag` = " + tag + " WHERE `idproducts` = '" + p_id + "' ", function (err, result, fields) {
++      if (err) { throw err;}
++    });
++
++    registering_tag = -1;
++    registered_tag_cb();
++    return;
++  }
+   /*con.connect(function(err) {
+     if (err) {
+       throw err;
+@@ -64,3 +77,7 @@ function update_db(t, went_in) {
+     }
+   });
+ }
++
++function wait_for_tag(p_id) {
++  registering_tag = p_id;
++}

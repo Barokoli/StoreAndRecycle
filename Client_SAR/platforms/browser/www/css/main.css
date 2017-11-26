@@ -42,14 +42,19 @@ font-size: 50pt;
 }
 
 button {
-    font-size: 30pt;
+    font-size: 20pt;
+    border: none;
+    background: none;
+}
+.buttonlike {
+    font-size: 20pt;
     border: none;
     background: none;
 }
 
 h1 {
   font-family: "chivo";
-  font-size: 40pt;
+  font-size: 30pt;
   font-weight: bold;
   text-align: center;
 }
@@ -65,8 +70,25 @@ h1 {
 
 .big {
 
-  font-size: 110pt;
+  font-size: 50pt;
 
+}
+
+#titel_ins {
+  position: absolute;
+  top: 70%;
+  background-color: rgba(1,1,1,0.2f);
+  border: none;
+  font-size: 50pt;
+  width: 95%;
+  text-align: center;
+}
+
+#add_item_check {
+  font-size: 40pt;
+  position: absolute;
+  top: 73%;
+  right: 20px;
 }
 
 .small{
@@ -84,18 +106,28 @@ h1 {
 .fullsize {
   width: 100%;
 }
+.afull{
+  width: 90%;
+  height: 90%;
+}
 
+.fixed{
+  position: fixed;
+    padding: 3pt
+}
+.withimg{
+background-image: url("img/1200px-Paper_cup.jpeg");
+background-color: #cccccc;
+
+}
 .eightysize {
   width: 80%;
 }
 
-#image_disp {
-  background-image: url();
-  background-size: cover;
+#image_disp2 {
   position: fixed;
   top: 0px;
   left: 0px;
-  width: 600px;
 }
 
 .positive{

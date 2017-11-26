@@ -9,10 +9,10 @@
   <table class="fullsize centered">
     <tr>
       <td>
-        <button onclick="load_view(4);">In a Box</button>
+        <button onclick="load_view(4);load_boxes();">In a Box</button>
       </td>
       <td>
-        <button onclick="register_item_id();">Individual</button>
+        <button onclick="load_view(4); current_item = current_item + 1; capture_item_img();">Individual</button>
       </td>
     </tr>
   </table>
@@ -23,17 +23,18 @@
   </div>
 </div>
 </div>
-<div id="image_disp" class="hidden">
-<img id="image_ghost" onload="check_size();">
-<div id="debug_dom">Debug</div>
+<img id="image_disp" class="hidden">
+<input type="text" name="fname">
+<!--<img id="image_ghost" onload="check_size();">-->
 
 <script>
 
+/*
 function register_item_id() {
 document.getElementById('messagescan').style.display = 'block';
 //insert the id scan here
 capture_item_img();
-}
+}*/
 
 function check_size() {
   console.log($('#image_ghost').width());
@@ -50,20 +51,8 @@ function check_size() {
     }
   }
 }
-var pic_received = function() {
-  $("#image_disp").show();
-  //$("#image_disp").src =
 
-  //var r_ratio = $('#image_ghost').width();
-  /*if (r_ratio <= 1.0) {
-    $("#image_disp").css("width", $(document).width() + "px");
-    $("#image_disp").css("max-height", $(document).width() * r_ratio + "px");
-  } else {
-    $("#image_disp").css("height", $(document).height() + "px");
-    $("#image_disp").css("max-width", $(document).height() / r_ratio + "px");
-  }*/
-}
-
+/*
 function capture_item_img() {
   $("#dialog_2_1").hide();
   if (cordova.platformId == "browser") {
@@ -71,5 +60,5 @@ function capture_item_img() {
   } else {
     capturePhotoWithFile("image_disp", pic_received);
   }
-}
+}*/
 </script>

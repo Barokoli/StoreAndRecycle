@@ -16,12 +16,15 @@ function init_camera() {
 function onPhotoDataSuccess(imageData) {
   // Get image handle
   //
-  var smallImage = document.getElementById("image_ghost");
+  var smallImage = document.getElementById("image_disp2");
   // Unhide image elements
   // Show the captured photo
   // The inline CSS rules are used to resize the image
+  console.log("data: " + smallImage);
   smallImage.src = "data:image/jpeg;base64," + imageData;
-  $('#' + result_disp).css('background-image', 'url(data:image/jpeg;base64,' + imageData + ')');
+  $("#image_disp2").attr("src", "data:image/jpeg;base64," + imageData);
+  $("#image_disp2").width($(window).width());
+  $("#image_disp2").show();
   result_cb();
 }
 
@@ -33,17 +36,18 @@ function onPhotoFileSuccess(imageData) {
 
   // Get image handle
   //
-  var smallImage = document.getElementById('image_ghost');
+  var smallImage = document.getElementById('image_disp2');
   // Unhide image elements
   //
   //smallImage.style.display = 'block';
   // Show the captured photo
   // The inline CSS rules are used to resize the image
   //
+  console.log("data: " + $("#image_disp2"));
   smallImage.src = imageData;
-  $('#' + result_disp).css('background-image', 'url(' + imageData + ')');
-  $('#' + result_disp).css("width", $(window).width() + "px");
-  $('#' + result_disp).css("height", $(window).width() * 1.333333333333 + "px");
+  $("#image_disp2").attr("src", "" + imageData);
+  $("#image_disp2").width($(window).width());
+  $("#image_disp2").show();
   result_cb();
   //$('#' + result_disp).css('background-image', 'url(' + imageData + ')');
 }

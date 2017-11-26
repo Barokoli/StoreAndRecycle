@@ -3,6 +3,7 @@ function init() {
 
     init_nav();
     init_camera();
+    init_db();
 }
 function on_device_ready(){
     console.log("Added back event");

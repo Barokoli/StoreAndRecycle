@@ -13,6 +13,14 @@ function load_view(nr) {
 
 function init_nav() {
   load_view(0);
+  $("#View_00").load("View_00.html");
+  $("#View_01").load("View_01.html");
+  $("#View_02").load("View_02.html");
+  $("#View_03").load("View_03.html");
+  $("#View_04").load("View_04.html");
+  $("#View_010").load("View_010.html");
+  $("#View_011").load("View_011.html");
+  $("#View_012").load("View_012.html");
 }
 
 function nav_go_back() {

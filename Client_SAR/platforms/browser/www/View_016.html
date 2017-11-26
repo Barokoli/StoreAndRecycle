@@ -1,0 +1,84 @@
+<div>Test Selling</div>
+<button onclick="authenticate_me();">Auth</button>
+<!--<script type="text/javascript">
+function authenticate_me() {
+  console.log("Authenticating.");
+  $.ajax({
+    url: 'https://api.sandbox.ebay.com/identity/v1/oauth2/token',
+    type: 'POST',
+    data: {
+      "grant_type": "client_credentials",
+      "redirect_uri": "<RuName-value>",
+      "scope": "https://api.ebay.com/oauth/api_scope"
+    },
+    headers: {
+        "Content-Type" : "application/x-www-form-urlencoded",   //If your header name has spaces or any other char not appropriate
+        "Authorization" : "Basic <B64-encoded_oauth_credentials>"  //for object property name, use quoted notation shown in second
+    },
+    dataType: 'json',
+    success: function (data) {
+        console.info(data);
+    }
+  });
+}
+
+  /*$.post( "https://api.sandbox.ebay.com/identity/v1/oauth2/token",
+  {
+    "grant_type": "client_credentials",
+    "redirect_uri": "<RuName-value>",
+    "scope": "https://api.ebay.com/oauth/api_scope"
+  }, function(result){
+        console.log("Res: " + result);
+    }););
+
+
+  POST
+  URL (Sandbox): https://api.sandbox.ebay.com/identity/v1/oauth2/token
+
+  HTTP headers:
+    Content-Type = application/x-www-form-urlencoded
+    Authorization = Basic <B64-encoded_oauth_credentials>
+
+  Request body (wrapped for readability):
+    grant_type=client_credentials&
+    redirect_uri=<RuName-value>&
+    scope=https://api.ebay.com/oauth/api_scope
+
+  $.get(URL,data,function(data,status,xhr),dataType);
+  GET
+  URL (Production): https://api.ebay.com/buy/browse/v1/item_summary/search?
+                    category_ids=108765&
+                    q=Beatles&
+                    filter=price:[200..500]&
+                    filter=priceCurrency:USD&
+                    limit=10
+
+  HTTP headers:
+    Authorization = Bearer <Application-token-value>*/
+
+
+
+  /*console.log("Creating Warehouse");
+  $.post( "https://api.ebay.com/sell/inventory/v1/location/basement",
+  {
+      "location": {
+          "address": {
+              "addressLine1": "Otakaari 24",
+              "addressLine2": "Alto University",
+              "city": "Espoo Helsinki",
+              "stateOrProvince": "CA",
+              "postalCode": "95125",
+              "country": "US"
+          }
+      },
+      "locationInstructions": "Items ship from here.",
+      "name": "Basement",
+      "merchantLocationStatus": "ENABLED",
+      "locationTypes": [
+          "WAREHOUSE"
+      ]
+  }, function(result){
+        console.log("Res: " + result);
+    }););*/
+
+</script>-->

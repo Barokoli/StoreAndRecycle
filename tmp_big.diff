@@ -1,0 +1,518 @@
+diff --git a/Client_SAR/platforms/browser/www/View_02.html b/Client_SAR/platforms/browser/www/View_02.html
+index a717fff..9de1c6b 100644
+--- a/Client_SAR/platforms/browser/www/View_02.html
++++ b/Client_SAR/platforms/browser/www/View_02.html
+@@ -11,9 +11,11 @@
+     </tr>
+   </table>
+ </div>
+-<div id="image_disp" class="hidden">
+-<img id="image_ghost" onload="check_size();">
+-<div id="debug_dom">Debug</div>
++<div id="dialog_2_2" class="full">
++  <img id="image_disp">
++  <div class="plazhalter"></div>
++  <input id="title_input" type="text" value="Title">
++</div>
+ 
+ <script>
+ 
+diff --git a/Client_SAR/platforms/browser/www/css/main.css b/Client_SAR/platforms/browser/www/css/main.css
+index dbdc6ee..06d168f 100644
+--- a/Client_SAR/platforms/browser/www/css/main.css
++++ b/Client_SAR/platforms/browser/www/css/main.css
+@@ -86,12 +86,26 @@ h1 {
+ }
+ 
+ #image_disp {
+-  background-image: url();
+-  background-size: cover;
+-  position: fixed;
++  position: absolute;
+   top: 0px;
+   left: 0px;
+-  width: 600px;
++}
++
++#title_input {
++  position: relative;
++  padding: 0;
++  margin: 0;
++  width: 95%;
++  text-align: center;
++  font-size: 50pt;
++  bottom: 0;
++  background-color: rgba(0,0,0,0);
++  border: none;
++}
++
++.plazhalter {
++  height: 70%;
++  width: 100%;
+ }
+ 
+ .positive{
+diff --git a/Client_SAR/platforms/browser/www/js/camera.js b/Client_SAR/platforms/browser/www/js/camera.js
+index b63a929..aea5ecd 100644
+--- a/Client_SAR/platforms/browser/www/js/camera.js
++++ b/Client_SAR/platforms/browser/www/js/camera.js
+@@ -16,12 +16,12 @@ function init_camera() {
+ function onPhotoDataSuccess(imageData) {
+   // Get image handle
+   //
+-  var smallImage = document.getElementById("image_ghost");
++  var smallImage = document.getElementById("image_disp");
+   // Unhide image elements
+   // Show the captured photo
+   // The inline CSS rules are used to resize the image
+   smallImage.src = "data:image/jpeg;base64," + imageData;
+-  $('#' + result_disp).css('background-image', 'url(data:image/jpeg;base64,' + imageData + ')');
++  $('#image_disp').width($(window).width() + "px");
+   result_cb();
+ }
+ 
+@@ -33,17 +33,15 @@ function onPhotoFileSuccess(imageData) {
+ 
+   // Get image handle
+   //
+-  var smallImage = document.getElementById('image_ghost');
++  var smallImage = document.getElementById('image_disp');
+   // Unhide image elements
+   //
+   //smallImage.style.display = 'block';
+   // Show the captured photo
+   // The inline CSS rules are used to resize the image
+   //
+-  smallImage.src = imageData;
+-  $('#' + result_disp).css('background-image', 'url(' + imageData + ')');
+-  $('#' + result_disp).css("width", $(window).width() + "px");
+-  $('#' + result_disp).css("height", $(window).width() * 1.333333333333 + "px");
++  smallImage.src = "" + imageData;
++  $('#image_disp').width($(window).width() + "px");
+   result_cb();
+   //$('#' + result_disp).css('background-image', 'url(' + imageData + ')');
+ }
+diff --git a/Client_SAR/platforms/browser/www/js/navigator.js b/Client_SAR/platforms/browser/www/js/navigator.js
+index caf5c4d..9246b46 100644
+--- a/Client_SAR/platforms/browser/www/js/navigator.js
++++ b/Client_SAR/platforms/browser/www/js/navigator.js
+@@ -2,11 +2,13 @@ var active_view = 0;
+ var view_history = [];
+ 
+ function load_view(nr) {
+-    $('#View_0'+active_view).hide();
++    var layer = nr > 9 ? "#View_" + nr : "#View_0" + nr;
++    var layer_a = nr > 9 ? "#View_" + active_view : "#View_0" + active_view;
++    $(layer_a).hide();
+     view_history.push(active_view);
+-    $('#View_0'+nr).show();
+-    if ($("#View_0"+nr).html() == "") {
+-        $("#View_0"+nr).load("View_0"+nr+".html");
++    $(layer).show();
++    if ($(layer_a).html() == "") {
++        $(layer).load(layer+".html");
+     }
+     active_view = nr;
+ }
+diff --git a/Client_SAR/www/View_02.html b/Client_SAR/www/View_02.html
+index a717fff..9de1c6b 100644
+--- a/Client_SAR/www/View_02.html
++++ b/Client_SAR/www/View_02.html
+@@ -11,9 +11,11 @@
+     </tr>
+   </table>
+ </div>
+-<div id="image_disp" class="hidden">
+-<img id="image_ghost" onload="check_size();">
+-<div id="debug_dom">Debug</div>
++<div id="dialog_2_2" class="full">
++  <img id="image_disp">
++  <div class="plazhalter"></div>
++  <input id="title_input" type="text" value="Title">
++</div>
+ 
+ <script>
+ 
+diff --git a/Client_SAR/www/css/main.css b/Client_SAR/www/css/main.css
+index dbdc6ee..06d168f 100644
+--- a/Client_SAR/www/css/main.css
++++ b/Client_SAR/www/css/main.css
+@@ -86,12 +86,26 @@ h1 {
+ }
+ 
+ #image_disp {
+-  background-image: url();
+-  background-size: cover;
+-  position: fixed;
++  position: absolute;
+   top: 0px;
+   left: 0px;
+-  width: 600px;
++}
++
++#title_input {
++  position: relative;
++  padding: 0;
++  margin: 0;
++  width: 95%;
++  text-align: center;
++  font-size: 50pt;
++  bottom: 0;
++  background-color: rgba(0,0,0,0);
++  border: none;
++}
++
++.plazhalter {
++  height: 70%;
++  width: 100%;
+ }
+ 
+ .positive{
+diff --git a/Client_SAR/www/js/camera.js b/Client_SAR/www/js/camera.js
+index b63a929..aea5ecd 100644
+--- a/Client_SAR/www/js/camera.js
++++ b/Client_SAR/www/js/camera.js
+@@ -16,12 +16,12 @@ function init_camera() {
+ function onPhotoDataSuccess(imageData) {
+   // Get image handle
+   //
+-  var smallImage = document.getElementById("image_ghost");
++  var smallImage = document.getElementById("image_disp");
+   // Unhide image elements
+   // Show the captured photo
+   // The inline CSS rules are used to resize the image
+   smallImage.src = "data:image/jpeg;base64," + imageData;
+-  $('#' + result_disp).css('background-image', 'url(data:image/jpeg;base64,' + imageData + ')');
++  $('#image_disp').width($(window).width() + "px");
+   result_cb();
+ }
+ 
+@@ -33,17 +33,15 @@ function onPhotoFileSuccess(imageData) {
+ 
+   // Get image handle
+   //
+-  var smallImage = document.getElementById('image_ghost');
++  var smallImage = document.getElementById('image_disp');
+   // Unhide image elements
+   //
+   //smallImage.style.display = 'block';
+   // Show the captured photo
+   // The inline CSS rules are used to resize the image
+   //
+-  smallImage.src = imageData;
+-  $('#' + result_disp).css('background-image', 'url(' + imageData + ')');
+-  $('#' + result_disp).css("width", $(window).width() + "px");
+-  $('#' + result_disp).css("height", $(window).width() * 1.333333333333 + "px");
++  smallImage.src = "" + imageData;
++  $('#image_disp').width($(window).width() + "px");
+   result_cb();
+   //$('#' + result_disp).css('background-image', 'url(' + imageData + ')');
+ }
+diff --git a/Server_SAR/node_modules/core-util-is/package.json b/Server_SAR/node_modules/core-util-is/package.json
+index 365451e..a2593e5 100644
+--- a/Server_SAR/node_modules/core-util-is/package.json
++++ b/Server_SAR/node_modules/core-util-is/package.json
+@@ -21,7 +21,7 @@
+   "_resolved": "https://registry.npmjs.org/core-util-is/-/core-util-is-1.0.2.tgz",
+   "_shasum": "b5fd54220aa2bc5ab57aab7140c940754503c1a7",
+   "_spec": "core-util-is@~1.0.0",
+-  "_where": "/Users/sebastian/Coding/Junction/StoreAndRecycle/Server_SAR/node_modules/readable-stream",
++  "_where": "/home/leenr/Junction-2017/sio-mqtt/node_modules/readable-stream",
+   "author": {
+     "name": "Isaac Z. Schlueter",
+     "email": "i@izs.me",
+diff --git a/Server_SAR/node_modules/graceful-fs/package.json b/Server_SAR/node_modules/graceful-fs/package.json
+index 891089c..f98b87f 100644
+--- a/Server_SAR/node_modules/graceful-fs/package.json
++++ b/Server_SAR/node_modules/graceful-fs/package.json
+@@ -1,5 +1,5 @@
+ {
+-  "_from": "graceful-fs@^4.1.6",
++  "_from": "graceful-fs@^4.1.2",
+   "_id": "graceful-fs@4.1.11",
+   "_inBundle": false,
+   "_integrity": "sha1-Dovf5NHduIVNZOBOp8AOKgJuVlg=",
+@@ -8,20 +8,24 @@
+   "_requested": {
+     "type": "range",
+     "registry": true,
+-    "raw": "graceful-fs@^4.1.6",
++    "raw": "graceful-fs@^4.1.2",
+     "name": "graceful-fs",
+     "escapedName": "graceful-fs",
+-    "rawSpec": "^4.1.6",
++    "rawSpec": "^4.1.2",
+     "saveSpec": null,
+-    "fetchSpec": "^4.1.6"
++    "fetchSpec": "^4.1.2"
+   },
+   "_requiredBy": [
+-    "/jsonfile"
++    "/fstream",
++    "/node-gyp",
++    "/node-ninja",
++    "/qlobber-fsq",
++    "/st"
+   ],
+   "_resolved": "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.1.11.tgz",
+   "_shasum": "0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658",
+-  "_spec": "graceful-fs@^4.1.6",
+-  "_where": "/Users/sebastian/Coding/Junction/StoreAndRecycle/Server_SAR/node_modules/jsonfile",
++  "_spec": "graceful-fs@^4.1.2",
++  "_where": "/home/leenr/Junction-2017/sio-mqtt/node_modules/node-gyp",
+   "bugs": {
+     "url": "https://github.com/isaacs/node-graceful-fs/issues"
+   },
+diff --git a/Server_SAR/node_modules/inherits/package.json b/Server_SAR/node_modules/inherits/package.json
+index 7467a83..9f425df 100644
+--- a/Server_SAR/node_modules/inherits/package.json
++++ b/Server_SAR/node_modules/inherits/package.json
+@@ -1,5 +1,5 @@
+ {
+-  "_from": "inherits@~2.0.3",
++  "_from": "inherits@^2.0.3",
+   "_id": "inherits@2.0.3",
+   "_inBundle": false,
+   "_integrity": "sha1-Yzwsg+PaQqUC9SRmAiSA9CCCYd4=",
+@@ -8,20 +8,28 @@
+   "_requested": {
+     "type": "range",
+     "registry": true,
+-    "raw": "inherits@~2.0.3",
++    "raw": "inherits@^2.0.3",
+     "name": "inherits",
+     "escapedName": "inherits",
+-    "rawSpec": "~2.0.3",
++    "rawSpec": "^2.0.3",
+     "saveSpec": null,
+-    "fetchSpec": "~2.0.3"
++    "fetchSpec": "^2.0.3"
+   },
+   "_requiredBy": [
+-    "/readable-stream"
++    "/callback-stream",
++    "/concat-stream",
++    "/duplexify",
++    "/glob",
++    "/mqtt",
++    "/mqtt-packet",
++    "/pumpify",
++    "/readable-stream",
++    "/websocket-stream"
+   ],
+   "_resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.3.tgz",
+   "_shasum": "633c2c83e3da42a502f52466022480f4208261de",
+-  "_spec": "inherits@~2.0.3",
+-  "_where": "/Users/sebastian/Coding/Junction/StoreAndRecycle/Server_SAR/node_modules/readable-stream",
++  "_spec": "inherits@^2.0.3",
++  "_where": "/home/leenr/Junction-2017/sio-mqtt/node_modules/mqtt",
+   "browser": "./inherits_browser.js",
+   "bugs": {
+     "url": "https://github.com/isaacs/inherits/issues"
+diff --git a/Server_SAR/node_modules/isarray/package.json b/Server_SAR/node_modules/isarray/package.json
+index 4b4dbfb..1fad6a3 100644
+--- a/Server_SAR/node_modules/isarray/package.json
++++ b/Server_SAR/node_modules/isarray/package.json
+@@ -21,7 +21,7 @@
+   "_resolved": "https://registry.npmjs.org/isarray/-/isarray-1.0.0.tgz",
+   "_shasum": "bb935d48582cba168c06834957a54a3e07124f11",
+   "_spec": "isarray@~1.0.0",
+-  "_where": "/Users/sebastian/Coding/Junction/StoreAndRecycle/Server_SAR/node_modules/readable-stream",
++  "_where": "/home/leenr/Junction-2017/sio-mqtt/node_modules/readable-stream",
+   "author": {
+     "name": "Julian Gruber",
+     "email": "mail@juliangruber.com",
+diff --git a/Server_SAR/node_modules/process-nextick-args/package.json b/Server_SAR/node_modules/process-nextick-args/package.json
+index 533199e..0391fd8 100644
+--- a/Server_SAR/node_modules/process-nextick-args/package.json
++++ b/Server_SAR/node_modules/process-nextick-args/package.json
+@@ -16,12 +16,13 @@
+     "fetchSpec": "~1.0.6"
+   },
+   "_requiredBy": [
++    "/mqtt-packet",
+     "/readable-stream"
+   ],
+   "_resolved": "https://registry.npmjs.org/process-nextick-args/-/process-nextick-args-1.0.7.tgz",
+   "_shasum": "150e20b756590ad3f91093f25a4f2ad8bff30ba3",
+   "_spec": "process-nextick-args@~1.0.6",
+-  "_where": "/Users/sebastian/Coding/Junction/StoreAndRecycle/Server_SAR/node_modules/readable-stream",
++  "_where": "/home/leenr/Junction-2017/sio-mqtt/node_modules/readable-stream",
+   "author": "",
+   "bugs": {
+     "url": "https://github.com/calvinmetcalf/process-nextick-args/issues"
+diff --git a/Server_SAR/node_modules/readable-stream/package.json b/Server_SAR/node_modules/readable-stream/package.json
+index eb8bf53..4bbaf87 100644
+--- a/Server_SAR/node_modules/readable-stream/package.json
++++ b/Server_SAR/node_modules/readable-stream/package.json
+@@ -1,27 +1,35 @@
+ {
+-  "_from": "readable-stream@2.3.3",
++  "_from": "readable-stream@^2.3.3",
+   "_id": "readable-stream@2.3.3",
+   "_inBundle": false,
+   "_integrity": "sha512-m+qzzcn7KUxEmd1gMbchF+Y2eIUbieUaxkWtptyHywrX0rE8QEYqPC07Vuy4Wm32/xE16NcdBctb8S0Xe/5IeQ==",
+   "_location": "/readable-stream",
+   "_phantomChildren": {},
+   "_requested": {
+-    "type": "version",
++    "type": "range",
+     "registry": true,
+-    "raw": "readable-stream@2.3.3",
++    "raw": "readable-stream@^2.3.3",
+     "name": "readable-stream",
+     "escapedName": "readable-stream",
+-    "rawSpec": "2.3.3",
++    "rawSpec": "^2.3.3",
+     "saveSpec": null,
+-    "fetchSpec": "2.3.3"
++    "fetchSpec": "^2.3.3"
+   },
+   "_requiredBy": [
+-    "/mysql"
++    "/bl",
++    "/callback-stream",
++    "/concat-stream",
++    "/duplexify",
++    "/glob-stream",
++    "/mqtt",
++    "/ordered-read-streams",
++    "/through2",
++    "/websocket-stream"
+   ],
+   "_resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-2.3.3.tgz",
+   "_shasum": "368f2512d79f9d46fdfc71349ae7878bbc1eb95c",
+-  "_spec": "readable-stream@2.3.3",
+-  "_where": "/Users/sebastian/Coding/Junction/StoreAndRecycle/Server_SAR/node_modules/mysql",
++  "_spec": "readable-stream@^2.3.3",
++  "_where": "/home/leenr/Junction-2017/sio-mqtt/node_modules/mqtt",
+   "browser": {
+     "util": false,
+     "./readable.js": "./readable-browser.js",
+diff --git a/Server_SAR/node_modules/safe-buffer/package.json b/Server_SAR/node_modules/safe-buffer/package.json
+index 00a914f..0ee85c3 100644
+--- a/Server_SAR/node_modules/safe-buffer/package.json
++++ b/Server_SAR/node_modules/safe-buffer/package.json
+@@ -1,29 +1,31 @@
+ {
+-  "_from": "safe-buffer@5.1.1",
++  "_from": "safe-buffer@~5.1.1",
+   "_id": "safe-buffer@5.1.1",
+   "_inBundle": false,
+   "_integrity": "sha512-kKvNJn6Mm93gAczWVJg7wH+wGYWNrDHdWvpUmHyEsgCtIwwo3bqPtV4tR5tuPaUhTOo/kvhVwd8XwwOllGYkbg==",
+   "_location": "/safe-buffer",
+   "_phantomChildren": {},
+   "_requested": {
+-    "type": "version",
++    "type": "range",
+     "registry": true,
+-    "raw": "safe-buffer@5.1.1",
++    "raw": "safe-buffer@~5.1.1",
+     "name": "safe-buffer",
+     "escapedName": "safe-buffer",
+-    "rawSpec": "5.1.1",
++    "rawSpec": "~5.1.1",
+     "saveSpec": null,
+-    "fetchSpec": "5.1.1"
++    "fetchSpec": "~5.1.1"
+   },
+   "_requiredBy": [
+-    "/mysql",
++    "/mqtt-packet",
+     "/readable-stream",
+-    "/string_decoder"
++    "/string_decoder",
++    "/websocket-stream",
++    "/ws"
+   ],
+   "_resolved": "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.1.1.tgz",
+   "_shasum": "893312af69b2123def71f57889001671eeb2c853",
+-  "_spec": "safe-buffer@5.1.1",
+-  "_where": "/Users/sebastian/Coding/Junction/StoreAndRecycle/Server_SAR/node_modules/mysql",
++  "_spec": "safe-buffer@~5.1.1",
++  "_where": "/home/leenr/Junction-2017/sio-mqtt/node_modules/readable-stream",
+   "author": {
+     "name": "Feross Aboukhadijeh",
+     "email": "feross@feross.org",
+diff --git a/Server_SAR/node_modules/string_decoder/package.json b/Server_SAR/node_modules/string_decoder/package.json
+index ed6fc4b..dc51f81 100644
+--- a/Server_SAR/node_modules/string_decoder/package.json
++++ b/Server_SAR/node_modules/string_decoder/package.json
+@@ -21,7 +21,7 @@
+   "_resolved": "https://registry.npmjs.org/string_decoder/-/string_decoder-1.0.3.tgz",
+   "_shasum": "0fc67d7c141825de94282dd536bec6b9bce860ab",
+   "_spec": "string_decoder@~1.0.3",
+-  "_where": "/Users/sebastian/Coding/Junction/StoreAndRecycle/Server_SAR/node_modules/readable-stream",
++  "_where": "/home/leenr/Junction-2017/sio-mqtt/node_modules/readable-stream",
+   "bugs": {
+     "url": "https://github.com/rvagg/string_decoder/issues"
+   },
+diff --git a/Server_SAR/node_modules/util-deprecate/package.json b/Server_SAR/node_modules/util-deprecate/package.json
+index 8e92e66..cc38a1d 100644
+--- a/Server_SAR/node_modules/util-deprecate/package.json
++++ b/Server_SAR/node_modules/util-deprecate/package.json
+@@ -21,7 +21,7 @@
+   "_resolved": "https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz",
+   "_shasum": "450d4dc9fa70de732762fbd2d4a28981419a0ccf",
+   "_spec": "util-deprecate@~1.0.1",
+-  "_where": "/Users/sebastian/Coding/Junction/StoreAndRecycle/Server_SAR/node_modules/readable-stream",
++  "_where": "/home/leenr/Junction-2017/sio-mqtt/node_modules/readable-stream",
+   "author": {
+     "name": "Nathan Rajlich",
+     "email": "nathan@tootallnate.net",
+diff --git a/Server_SAR/rfid_tracker.js b/Server_SAR/rfid_tracker.js
+index c344dbf..933b6cc 100644
+--- a/Server_SAR/rfid_tracker.js
++++ b/Server_SAR/rfid_tracker.js
+@@ -2,6 +2,8 @@ var mqtt = require('mqtt');
+ var client  = mqtt.connect('mqtt://mqtt.intelligentpackaging.online');
+ var mysql = require('mysql');
+ var last_tag_read = "";
++var registering_tag = -1;
++var registered_tag_cb;
+ 
+ var con = mysql.createConnection({
+   host: "localhost",
+@@ -14,19 +16,30 @@ client.on('connect', function () {
+   //client.subscribe('location/Junction.2017.2/+');
+   client.subscribe('location/Junction.2017.3/+');
+   //client.subscribe('location/Junction.2017.4/+');
+-})
++});
+ 
+ client.on('message', function (topic, message) {
+   // message is Buffer
+   console.log(topic.toString() + "  " + message.toString());
+-  storage_action(topic, message);
+-})
++  //storage_action(topic, message);
++});
+ 
+ function storage_action(t , m) {
+   var tag = t.toString().split("/")[1];
+   if (tag == "Junction.2017.2" || tag == "Junction.2017.4") {
+     return;
+   }
++
++  if (registering_tag > -1) {
++    con.query("USE sys");
++    con.query("UPDATE products SET `tag` = " + tag + " WHERE `idproducts` = '" + p_id + "' ", function (err, result, fields) {
++      if (err) { throw err;}
++    });
++
++    registering_tag = -1;
++    registered_tag_cb();
++    return;
++  }
+   /*con.connect(function(err) {
+     if (err) {
+       throw err;
+@@ -64,3 +77,8 @@ function update_db(t, went_in) {
+     }
+   });
+ }
++
++function wait_for_tag(p_id) {
++  console.log("Waiting for tag to be scanned.")
++  registering_tag = p_id;
++}

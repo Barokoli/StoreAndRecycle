@@ -42,14 +42,19 @@ font-size: 50pt;
 }
 
 button {
-    font-size: 30pt;
+    font-size: 20pt;
+    border: none;
+    background: none;
+}
+.buttonlike {
+    font-size: 20pt;
     border: none;
     background: none;
 }
 
 h1 {
   font-family: "chivo";
-  font-size: 40pt;
+  font-size: 30pt;
   font-weight: bold;
   text-align: center;
 }
@@ -65,7 +70,7 @@ h1 {
 
 .big {
 
-  font-size: 110pt;
+  font-size: 50pt;
 
 }
 
@@ -84,7 +89,20 @@ h1 {
 .fullsize {
   width: 100%;
 }
+.afull{
+  width: 90%;
+  height: 90%;
+}
 
+.fixed{
+  position: fixed;
+    padding: 3pt
+}
+.withimg{
+background-image: url("img/1200px-Paper_cup.jpeg");
+background-color: #cccccc;
+
+}
 .eightysize {
   width: 80%;
 }

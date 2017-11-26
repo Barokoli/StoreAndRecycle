@@ -1,0 +1,43 @@
+<div class="fixed">
+<button onclick="load_view(1);" name="home" i class="fa fa-home" aria-hidden="true"></i> </button>
+</div>
+
+<div class " full centered">
+
+<div style= "padding: 15pt" >
+<h1>
+  Scan a box or choose one from the list
+</h1>
+
+<div class = "buttonlike fullsize">
+
+<i  class="fa fa-search" aria-hidden="true"></i>
+<input class= style= "width: 90%;" "buttonlike" name="searchbox" type="text" placeholder="Search here">
+
+<select class= "buttonlike">
+  <option value="name">Name</option>
+  <option value="category">Category</option>
+
+</select>
+</div>
+  <button class = "fullsize"  style="text-align: left;"   onclick="capture_item_img;">    Boxname  <i style="float:right" class="fa fa-plus-circle" aria-hidden="true"></i>     </button> <br>
+
+</div>
+
+</div>
+
+
+<script>
+
+function capture_item_img() {
+  $("#dialog_2_1").hide();
+  if (cordova.platformId == "browser") {
+    capturePhotoWithData("image_disp", pic_received);
+    $("#image_disp").show();
+
+  } else {
+    capturePhotoWithFile("image_disp", pic_received);
+
+  }
+}
+</script>

@@ -1,21 +1,39 @@
-<div id="dialog_2_1" class="full">
+<div class="fixed">
+<button onclick="load_view(1);" name="home" i class="fa fa-home" aria-hidden="true"></i> </button>
+</div>
+
+<div class " full centered" id="dialog_2_1">
+
+<div style= "padding: 15pt" >
   <h1 class="fullsize pad">Where do you want to store it?</h1>
   <table class="fullsize centered">
     <tr>
       <td>
-        <button onclick="capture_item_img();">In a Box</button>
+        <button onclick="load_view(4);">In a Box</button>
       </td>
       <td>
-        <button>Individual</button>
+        <button onclick="register_item_id();">Individual</button>
       </td>
     </tr>
   </table>
+  <div>
+    <h1 id="messagescan" style= "display:none">
+      Please scan the tag and attache it to the item!
+    </h1>
+  </div>
+</div>
 </div>
 <div id="image_disp" class="hidden">
 <img id="image_ghost" onload="check_size();">
 <div id="debug_dom">Debug</div>
 
 <script>
+
+function register_item_id() {
+document.getElementById('messagescan').style.display = 'block';
+//insert the id scan here
+capture_item_img();
+}
 
 function check_size() {
   console.log($('#image_ghost').width());
